@@ -162,7 +162,7 @@ const ToastContainer: React.FC = () => {
                 <div
                     key={t.id}
                     className={cn(
-                        "flex items-start gap-3 p-3 rounded-lg border shadow-lg",
+                        "flex items-start gap-3 p-3 ui-menu rounded-xl border shadow-md",
                         "bg-card animate-in slide-in-from-right-5 fade-in duration-200",
                         TOAST_STYLES[t.type],
                         t.onClick && "cursor-pointer hover:opacity-90 transition-opacity"

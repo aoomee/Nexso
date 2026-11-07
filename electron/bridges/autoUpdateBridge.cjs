@@ -73,6 +73,8 @@ function getLinuxPackageType() {
  * (macOS zip/dmg, Windows NSIS, Linux AppImage/deb/rpm/pacman).
  */
 function isAutoUpdateSupported() {
+  // Locally branded builds must not replace themselves with upstream binaries.
+  if (require('../../package.json').netcattyUpdateChannel === 'manual') return false;
   if (process.platform === "darwin" || process.platform === "win32") {
     return true;
   }

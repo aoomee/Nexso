@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./components/ui/design-system.css";
+@import "./components/workspace/workspace.css";
 @import "./components/settings/tabs/plugin-marketplace.css";
 @import "@mdxeditor/editor/style.css";
 
@@ -96,9 +98,13 @@
   --color-card-foreground: hsl(var(--card-foreground));
 
   /* Border Radius */
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-xs: 4px;
+  --radius-sm: var(--ui-radius-small);
+  --radius-md: var(--ui-radius-control);
+  --radius-lg: var(--ui-radius-menu);
+  --radius-xl: var(--ui-radius-surface);
+  --radius-2xl: var(--ui-radius-dialog);
+  --radius-3xl: 32px;
 
   /* Fonts */
   --font-sans: "Mona Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
@@ -671,14 +677,15 @@ html[data-theme-transition] *::after {
 
 .glass-panel {
   background: hsl(var(--secondary) / 0.95);
-  border: 1px solid hsl(var(--border) / 0.8);
+  border: 1px solid hsl(var(--border));
   box-shadow: 0 14px 40px hsl(var(--foreground) / 0.12);
 }
 
 .soft-card {
+  border-radius: var(--ui-radius-surface);
   background: hsl(var(--card));
-  border: 1px solid hsl(var(--border) / 0.8);
-  box-shadow: 0 4px 12px hsl(var(--foreground) / 0.06);
+  border: 1px solid hsl(var(--border));
+  box-shadow: none;
 }
 
 @keyframes session-activity-breathe {
@@ -1090,7 +1097,7 @@ html[data-theme-transition] *::after {
   align-items: stretch !important;
   flex-direction: column !important;
   border: 1px solid hsl(var(--border) / 0.7) !important;
-  border-radius: 0.75rem !important;
+  border-radius: var(--ui-radius-dialog) !important;
   background: hsl(var(--popover)) !important;
   color: hsl(var(--popover-foreground)) !important;
   box-shadow:
@@ -1136,7 +1143,7 @@ html[data-theme-transition] *::after {
   min-height: 2.1rem !important;
   box-sizing: border-box !important;
   padding: 0.4rem 0.65rem !important;
-  border-radius: 0.5rem !important;
+  border-radius: var(--ui-radius-control) !important;
   border: 1px solid hsl(var(--border) / 0.75) !important;
   background: hsl(var(--background)) !important;
   color: hsl(var(--foreground)) !important;
@@ -1157,7 +1164,7 @@ html[data-theme-transition] *::after {
 
 .netcatty-mdx-editor [class*="_downshiftInputWrapper_"] {
   width: 100% !important;
-  border-radius: 0.5rem !important;
+  border-radius: var(--ui-radius-control) !important;
   border: 1px solid hsl(var(--border) / 0.75) !important;
   background: hsl(var(--background)) !important;
   overflow: hidden;
@@ -1202,7 +1209,7 @@ html[data-theme-transition] *::after {
   justify-content: center !important;
   min-height: 2rem !important;
   padding: 0.35rem 0.85rem !important;
-  border-radius: 0.5rem !important;
+  border-radius: var(--ui-radius-control) !important;
   font-size: 12px !important;
   font-weight: 550 !important;
   line-height: 1.2 !important;
@@ -2028,7 +2035,7 @@ html[data-theme-transition] *::after {
   padding: 0.125rem;
   opacity: 0;
   pointer-events: none;
-  border: 1px solid hsl(var(--border) / 0.8);
+  border: 1px solid hsl(var(--border));
   border-radius: 0.375rem;
   background: hsl(var(--background) / 0.96);
   box-shadow: 0 2px 8px hsl(var(--foreground) / 0.12);

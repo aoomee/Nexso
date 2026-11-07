@@ -1,4 +1,4 @@
-export const VAULT_HOST_GRID_GAP = 12;
+export const VAULT_HOST_GRID_GAP = 8;
 export const VAULT_HOST_GRID_MIN_CARD_WIDTH = 220;
 export const VAULT_HOST_GRID_MAX_COLUMNS = 4;
 

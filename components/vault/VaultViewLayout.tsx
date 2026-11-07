@@ -19,7 +19,6 @@ import { LocalShellHostDetailsPanel } from "../LocalShellHostDetailsPanel";
 import { VaultImportProgressPanel } from "./ImportVaultDialog";
 import {
   VaultHeaderSearch,
-  VaultPageHeader,
   vaultHeaderIconButtonClass,
   vaultHeaderSecondaryButtonClass,
 } from "./VaultPageHeader";
@@ -27,7 +26,7 @@ import { useConnectionLogsStore } from "../../application/state/connectionLogsSt
 import { useNotesStore } from "../../application/state/notesStore";
 import { LazyLoadBoundary } from "../ui/lazy-load-boundary";
 import { toast } from "../ui/toast";
-import { AppWordmark } from "../AppWordmark";
+import { WorkspaceBrand, WorkspaceToolbar } from "../workspace/WorkspaceChrome";
 import { openHostBrowser } from "../../application/hostBrowser";
 import { PluginVaultNavigation, PluginVaultPage } from '../plugins/PluginVaultPages';
 
@@ -134,7 +133,6 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
     Activity,
     allGroupPaths,
     allTags,
-    AppLogo,
     Array,
     Badge,
     BookMarked,
@@ -554,14 +552,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
   return (
     <div
       ref={rootRef}
-      className="absolute inset-0 min-h-0 flex bg-secondary"
+      className="absolute inset-0 min-h-0 flex bg-background"
       data-section="vault-view"
     >
       {/* Sidebar */}
       <TooltipProvider delayDuration={100}>
         <div
           className={cn(
-            "relative shrink-0 bg-secondary flex flex-col",
+            "relative shrink-0 bg-background flex flex-col",
             isSidebarResizing
               ? "transition-none"
               : "transition-[width] duration-200",
@@ -571,7 +569,7 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
         >
           <div
             className={cn(
-              "pt-5 pb-6 flex items-center",
+              "h-[76px] shrink-0 flex items-center",
               sidebarCollapsed ? "px-2 justify-center" : "px-4",
             )}
           >
@@ -582,10 +580,7 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
                   onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                   className="flex items-center gap-2.5 hover:opacity-80 transition-opacity"
                 >
-                  <AppLogo className="h-8 w-8 flex-shrink-0" />
-                  {!sidebarCollapsed && (
-                    <AppWordmark className="h-5 w-auto text-foreground" />
-                  )}
+                  <WorkspaceBrand collapsed={sidebarCollapsed} />
                 </button>
               </TooltipTrigger>
               <TooltipContent side="right">
@@ -597,12 +592,13 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
           </div>
 
           <div
-            className={cn("min-h-0 flex-1 overflow-y-auto space-y-1", sidebarCollapsed ? "px-1.5" : "px-2.5")}
+            className={cn("workspace-navigation min-h-0 flex-1 overflow-y-auto space-y-1.5", sidebarCollapsed ? "px-1.5" : "px-2.5")}
           >
             <Tooltip>
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "hosts" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "hosts" ? "page" : undefined}
                   data-plugin-vault-fallback
                   className={cn(
                     "w-full h-10",
@@ -610,7 +606,7 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "hosts" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => {
                     setCurrentSection("hosts");
@@ -632,13 +628,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "keys" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "keys" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "keys" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => {
                     setCurrentSection("keys");
@@ -658,13 +655,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "proxies" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "proxies" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "proxies" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => {
                     setCurrentSection("proxies");
@@ -684,13 +682,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "port" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "port" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "port" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => setCurrentSection("port")}
                 >
@@ -710,13 +709,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
                   variant={
                     currentSection === "snippets" ? "secondary" : "ghost"
                   }
+                  aria-current={currentSection === "snippets" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "snippets" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => {
                     setCurrentSection("snippets");
@@ -736,13 +736,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "notes" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "notes" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "notes" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => {
                     setCurrentSection("notes");
@@ -764,13 +765,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
                   variant={
                     currentSection === "knownhosts" ? "secondary" : "ghost"
                   }
+                  aria-current={currentSection === "knownhosts" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "knownhosts" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => setCurrentSection("knownhosts")}
                 >
@@ -788,13 +790,14 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               <TooltipTrigger asChild>
                 <RippleButton
                   variant={currentSection === "logs" ? "secondary" : "ghost"}
+                  aria-current={currentSection === "logs" ? "page" : undefined}
                   className={cn(
                     "w-full h-10",
                     sidebarCollapsed
                       ? "justify-center p-0"
                       : "justify-start gap-3",
                     currentSection === "logs" &&
-                      "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+                      "bg-secondary text-foreground hover:bg-secondary border-transparent",
                   )}
                   onClick={() => setCurrentSection("logs")}
                 >
@@ -856,11 +859,11 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
       </TooltipProvider>
 
       <div
-        className="flex min-w-0 flex-1 py-0 pr-2 pb-2 pl-0"
+        className="flex min-w-0 flex-1"
         data-section="vault-stage"
       >
         <div
-          className="relative flex min-h-0 flex-1 overflow-hidden rounded-xl border border-border/60 bg-background shadow-sm"
+          className="relative flex min-h-0 flex-1 overflow-hidden bg-background"
           data-section="vault-surface"
         >
           {/* Main Area */}
@@ -869,10 +872,9 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
             data-section="vault-main"
           >
             {pluginVault?.selected && <PluginVaultPage key={pluginVault.selected.key} model={pluginVault} />}
-            <VaultPageHeader
-              className={cn(!isHostsSectionActive && "hidden")}
-              dataSection="vault-hosts-header"
-            >
+            <WorkspaceToolbar
+              hidden={!isHostsSectionActive}
+              search={<>
               <VaultHeaderSearch
                 placeholder={t("vault.hosts.search.placeholder")}
                 className="flex-1"
@@ -899,84 +901,8 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
               >
                 {t("vault.hosts.connect")}
               </Button>
-              {/* View mode, tag filter, and sort controls */}
-              <div className="flex items-center gap-1 app-no-drag">
-                <Dropdown>
-                  <DropdownTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className={vaultHeaderIconButtonClass}
-                    >
-                      {viewMode === "grid" ? (
-                        <LayoutGrid size={16} />
-                      ) : viewMode === "list" ? (
-                        <List size={16} />
-                      ) : (
-                        <Network size={16} />
-                      )}
-                      <ChevronDown size={10} className="ml-0.5" />
-                    </Button>
-                  </DropdownTrigger>
-                  <DropdownContent className="w-32" align="end">
-                    <Button
-                      variant={viewMode === "grid" ? "secondary" : "ghost"}
-                      className="w-full justify-start gap-2 h-9"
-                      onClick={() => setViewMode("grid")}
-                    >
-                      <LayoutGrid size={14} /> {t("vault.view.grid")}
-                    </Button>
-                    <Button
-                      variant={viewMode === "list" ? "secondary" : "ghost"}
-                      className="w-full justify-start gap-2 h-9"
-                      onClick={() => setViewMode("list")}
-                    >
-                      <List size={14} /> {t("vault.view.list")}
-                    </Button>
-                    <Button
-                      variant={viewMode === "tree" ? "secondary" : "ghost"}
-                      className="w-full justify-start gap-2 h-9"
-                      onClick={() => setViewMode("tree")}
-                    >
-                      <Network size={14} /> {t("vault.view.tree")}
-                    </Button>
-                  </DropdownContent>
-                </Dropdown>
-                <TagFilterDropdown
-                  allTags={allTags}
-                  selectedTags={selectedTags}
-                  onChange={setSelectedTags}
-                  onEditTag={handleEditTag}
-                  onDeleteTag={handleDeleteTag}
-                  className={vaultHeaderIconButtonClass}
-                />
-                <SortDropdown
-                  value={sortMode}
-                  onChange={setSortMode}
-                  className={vaultHeaderIconButtonClass}
-                />
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant={isMultiSelectMode ? "secondary" : "ghost"}
-                      size="icon"
-                      className={vaultHeaderIconButtonClass}
-                      onClick={() => {
-                        if (isMultiSelectMode) {
-                          clearHostSelection();
-                        } else {
-                          setIsMultiSelectMode(true);
-                        }
-                      }}
-                    >
-                      <CheckSquare size={16} />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {t("vault.hosts.multiSelect")}
-                  </TooltipContent>
-                </Tooltip>
-              </div>
+              </>}
+              actions={<>
               {/* New Host split button — collapses with an animation when the
                 host details / new-host aside panel is open, since the button
                 would be a no-op in that state. */}
@@ -1087,7 +1013,88 @@ export function VaultViewLayout({ ctx }: { ctx: VaultViewLayoutContext }) {
                   <Usb size={14} className="mr-2" /> {t("serial.button")}
                 </Button>
               </div>
-            </VaultPageHeader>
+              </>}
+              filters={<>
+              {/* View mode, tag filter, and sort controls */}
+              <div className="flex items-center gap-1 app-no-drag">
+                <Dropdown>
+                  <DropdownTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className={vaultHeaderIconButtonClass}
+                    >
+                      {viewMode === "grid" ? (
+                        <LayoutGrid size={16} />
+                      ) : viewMode === "list" ? (
+                        <List size={16} />
+                      ) : (
+                        <Network size={16} />
+                      )}
+                      <ChevronDown size={10} className="ml-0.5" />
+                    </Button>
+                  </DropdownTrigger>
+                  <DropdownContent className="w-32" align="end">
+                    <Button
+                      variant={viewMode === "grid" ? "secondary" : "ghost"}
+                      className="w-full justify-start gap-2 h-9"
+                      onClick={() => setViewMode("grid")}
+                    >
+                      <LayoutGrid size={14} /> {t("vault.view.grid")}
+                    </Button>
+                    <Button
+                      variant={viewMode === "list" ? "secondary" : "ghost"}
+                      className="w-full justify-start gap-2 h-9"
+                      onClick={() => setViewMode("list")}
+                    >
+                      <List size={14} /> {t("vault.view.list")}
+                    </Button>
+                    <Button
+                      variant={viewMode === "tree" ? "secondary" : "ghost"}
+                      className="w-full justify-start gap-2 h-9"
+                      onClick={() => setViewMode("tree")}
+                    >
+                      <Network size={14} /> {t("vault.view.tree")}
+                    </Button>
+                  </DropdownContent>
+                </Dropdown>
+                <TagFilterDropdown
+                  allTags={allTags}
+                  selectedTags={selectedTags}
+                  onChange={setSelectedTags}
+                  onEditTag={handleEditTag}
+                  onDeleteTag={handleDeleteTag}
+                  className={vaultHeaderIconButtonClass}
+                />
+                <SortDropdown
+                  value={sortMode}
+                  onChange={setSortMode}
+                  className={vaultHeaderIconButtonClass}
+                />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={isMultiSelectMode ? "secondary" : "ghost"}
+                      size="icon"
+                      className={vaultHeaderIconButtonClass}
+                      onClick={() => {
+                        if (isMultiSelectMode) {
+                          clearHostSelection();
+                        } else {
+                          setIsMultiSelectMode(true);
+                        }
+                      }}
+                    >
+                      <CheckSquare size={16} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {t("vault.hosts.multiSelect")}
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+              </>}
+            />
 
             {isMultiSelectMode && isHostsSectionActive && (
               <div className="px-4 py-1.5 bg-background border-b border-border/40 flex items-center gap-2">

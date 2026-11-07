@@ -1034,7 +1034,7 @@ const TopTabsInner: React.FC<TopTabsProps> = ({
     <div
       data-top-tabs-root
       data-section="top-tabs"
-      className="relative w-full bg-secondary app-drag"
+      className="workspace-tabs relative w-full bg-secondary app-drag"
       style={{
         ...dragRegionNoSelect,
         backgroundColor: 'var(--top-tabs-bg, hsl(var(--secondary)))',
@@ -1049,7 +1049,7 @@ const TopTabsInner: React.FC<TopTabsProps> = ({
       {/* Always-on drag stripe so the window can be moved even when tabs fill the bar */}
       <div className="absolute inset-x-0 top-0 h-1 app-drag pointer-events-auto z-10" style={dragRegionStyle} aria-hidden />
       <div
-        className="h-9 flex items-end gap-0 app-drag overflow-visible"
+        className="h-12 pb-2 flex items-end gap-1 app-drag overflow-visible"
         style={{
           ...dragRegionStyle,
           paddingLeft: isMacClient && !isWindowFullscreen ? 76 : 12,

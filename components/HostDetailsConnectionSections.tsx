@@ -103,6 +103,7 @@ export const HostDetailsConnectionSections: React.FC<HostDetailsConnectionSectio
   effectiveFormDistro,
   getDistroOptionLabel,
   totpFlushRef,
+  showAddress = true,
 }) => {
   const selectAuthMethod = (authMethod: "auto" | "password" | "key" | "certificate") => {
     setForm((previous: Host) => applyEffectiveHostAuthMethodSelection(
@@ -132,7 +133,7 @@ export const HostDetailsConnectionSections: React.FC<HostDetailsConnectionSectio
 
   return (
   <>
-        <HostDetailsSection
+        {showAddress && <HostDetailsSection
           icon={<MapPin size={14} className="text-muted-foreground" />}
           title={t("hostDetails.section.address")}
         >
@@ -142,7 +143,7 @@ export const HostDetailsConnectionSections: React.FC<HostDetailsConnectionSectio
             onChange={(e) => update("hostname", e.target.value)}
             className="h-10 w-full"
           />
-        </HostDetailsSection>
+        </HostDetailsSection>}
 
         <HostDetailsSection
           icon={<KeyRound size={14} className="text-muted-foreground" />}

@@ -24,7 +24,7 @@ const ELECTRON_UPDATER_ID = "electron-updater";
  * assert on their interactions. Restores Module._load and the bridge cache on
  * exit so tests stay isolated.
  */
-async function withMocks({ autoUpdater, autoUpdaterExports, windowManager, globalShortcutBridge, dirtyEditorGuard, browserWindows } = {}, fn) {
+async function withMocks({ packageMetadata, autoUpdater, autoUpdaterExports, windowManager, globalShortcutBridge, dirtyEditorGuard, browserWindows } = {}, fn) {
   const fakeAutoUpdater = autoUpdater || {
     autoDownload: true,
     autoInstallOnAppQuit: false,
@@ -63,6 +63,7 @@ async function withMocks({ autoUpdater, autoUpdaterExports, windowManager, globa
         : { autoUpdater: fakeAutoUpdater };
     }
     if (parent && parent.filename === BRIDGE_PATH) {
+      if (request === '../../package.json' && packageMetadata) return packageMetadata;
       const resolved = path.resolve(path.dirname(BRIDGE_PATH), request);
       const withExt = resolved.endsWith(".cjs") ? resolved : `${resolved}.cjs`;
       if (withExt === WINDOW_MANAGER_PATH) return fakeWindowManager;
@@ -875,4 +876,15 @@ test("install handler installs directly when no main window is reachable", async
   } finally {
     global.setTimeout = originalSetTimeout;
   }
+});
+
+
+test('manual-update builds do not offer upstream binary installation', async () => {
+  await withMocks({ packageMetadata: { netcattyUpdateChannel: 'manual' } }, async ({ bridge }) => {
+    const handlers = new Map();
+    bridge.registerHandlers({ handle: (channel, handler) => handlers.set(channel, handler) });
+    const result = await handlers.get('netcatty:update:check')();
+    assert.equal(result.supported, false);
+    assert.equal(result.available, false);
+  });
 });

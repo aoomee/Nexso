@@ -1,0 +1,65 @@
+name: Nexso Release
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Existing version tag, for example v0.1.3'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Validate tagged source
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: node -e 'if (process.env.RELEASE_TAG !== "v" + require("./package.json").version) process.exit(1)'
+      - run: npm ci --ignore-scripts
+      - run: node node_modules/electron/install.js
+      - run: npm run postinstall
+      - run: npm run fetch:mosh -- --platform=darwin --arch=universal --resolve-release
+      - run: npm run fetch:et -- --platform=darwin --arch=universal --resolve-release
+      - run: npm run build
+      - run: npx --no-install electron-builder --config scripts/electron-builder.nexso.cjs --mac --arm64 --publish=never
+      - name: Verify package
+        run: |
+          codesign --verify --deep --strict release/mac-arm64/Nexso.app
+          hdiutil verify release/*.dmg
+          cd release
+          shasum -a 256 *.dmg > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexso-macos-arm64
+          path: |
+            release/*.dmg
+            release/SHA256SUMS
+          if-no-files-found: error
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: nexso-macos-arm64
+          path: release
+      - name: Publish tagged installer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          gh release create "$RELEASE_TAG" release/*.dmg release/SHA256SUMS --verify-tag --title "Nexso $RELEASE_TAG" --generate-notes

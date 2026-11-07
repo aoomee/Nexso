@@ -79,6 +79,7 @@ type DistroAvatarProps = {
   host: Pick<Host, "distro" | "manualDistro" | "distroMode" | "os"> &
     Partial<Pick<Host, "protocol" | "iconMode" | "iconId" | "iconColorMode" | "iconColor" | "iconColorCustom">>;
   fallback: string;
+  appearance?: "brand" | "quiet";
   className?: string;
   /** xs matches top tab bar icons (h-4 rounded rect) */
   size?: "xs" | "sm" | "md" | "tree" | "log" | "lg";
@@ -89,6 +90,7 @@ const DistroAvatarInner: React.FC<DistroAvatarProps> = ({
   fallback: _fallback,
   className,
   size = "md",
+  appearance = "brand",
 }) => {
   const distro = getEffectiveHostDistro(host);
   const logo = DISTRO_LOGOS[distro];
@@ -154,6 +156,16 @@ const DistroAvatarInner: React.FC<DistroAvatarProps> = ({
         style={{ backgroundColor: customAppearance.colorHex }}
       >
         {renderHostIconGlyph(customAppearance.iconId, iconSize)}
+      </div>
+    );
+  }
+
+  if (appearance === "quiet" && !customColor) {
+    return (
+      <div data-host-avatar className={cn("shrink-0 flex items-center justify-center bg-secondary text-muted-foreground", containerClass, className)}>
+        {logo && !errored ? (
+          <img src={logo} alt={distro || host.os} className={cn("object-contain brightness-0 opacity-65 dark:invert", iconSize)} onError={() => setErrored(true)} />
+        ) : <Server className={iconSize} />}
       </div>
     );
   }

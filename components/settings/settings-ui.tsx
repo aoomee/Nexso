@@ -57,7 +57,7 @@ export const Select: React.FC<SelectProps> = ({
     <SelectPrimitive.Root value={value} onValueChange={onChange} disabled={disabled}>
       <SelectPrimitive.Trigger
         className={cn(
-          "flex h-9 max-w-full items-center justify-between rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:min-w-0 [&>span]:truncate [&>span]:whitespace-nowrap",
+          "ui-control flex h-9 max-w-full items-center justify-between rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:min-w-0 [&>span]:truncate [&>span]:whitespace-nowrap",
           fitSelectedText && "min-w-max",
           className,
         )}
@@ -69,12 +69,12 @@ export const Select: React.FC<SelectProps> = ({
           </span>
         </SelectPrimitive.Value>
         <SelectPrimitive.Icon asChild>
-          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronDown className="ml-2 h-4 w-4 shrink-0 text-muted-foreground" />
         </SelectPrimitive.Icon>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Portal>
         <SelectPrimitive.Content
-          className="z-[200000] max-h-80 w-max max-w-[min(24rem,var(--radix-select-content-available-width))] overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1"
+          className="z-[200000] max-h-80 w-max max-w-[min(24rem,var(--radix-select-content-available-width))] overflow-hidden ui-menu rounded-lg border bg-popover text-popover-foreground shadow-md data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1"
           position="popper"
           sideOffset={4}
           style={{ minWidth: "max(12rem, var(--radix-select-trigger-width))" }}
@@ -171,7 +171,7 @@ export const SettingHint: React.FC<{
   <p className={cn(settingHintClassName, className)}>{children}</p>
 );
 
-export const settingCardClassName = "rounded-lg border bg-card";
+export const settingCardClassName = "ui-surface rounded-xl border bg-card";
 
 interface SettingCardProps {
   children: React.ReactNode;

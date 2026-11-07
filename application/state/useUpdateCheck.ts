@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { checkForUpdates, getReleaseUrl, type ReleaseInfo, type UpdateCheckResult } from '../../infrastructure/services/updateService';
+import { checkForUpdates, getReleaseUrl, isProjectReleaseUrl, type ReleaseInfo, type UpdateCheckResult } from '../../infrastructure/services/updateService';
 import { localStorageAdapter } from '../../infrastructure/persistence/localStorageAdapter';
 import { STORAGE_KEY_UPDATE_DISMISSED_VERSION, STORAGE_KEY_UPDATE_LAST_CHECK, STORAGE_KEY_UPDATE_LATEST_RELEASE, STORAGE_KEY_AUTO_UPDATE_ENABLED, STORAGE_KEY_DEBUG_UPDATE_DEMO } from '../../infrastructure/config/storageKeys';
 import { netcattyBridge } from '../../infrastructure/services/netcattyBridge';
@@ -318,7 +318,7 @@ export function useUpdateCheck(options?: { autoUpdateEnabled?: boolean; enabled?
             tagName: 'v1.0.0',
             name: 'Netcatty v1.0.0',
             body: 'Demo release for testing update notification',
-            htmlUrl: 'https://github.com/binaricat/Netcatty/releases',
+            htmlUrl: getReleaseUrl(),
             publishedAt: new Date().toISOString(),
             assets: [],
           },
@@ -635,6 +635,7 @@ export function useUpdateCheck(options?: { autoUpdateEnabled?: boolean; enabled?
       if (cachedRelease) {
         try {
           const release = JSON.parse(cachedRelease) as ReleaseInfo;
+          if (!isProjectReleaseUrl(release.htmlUrl)) throw new Error("Ignoring foreign release cache");
           const dismissedVersion = localStorageAdapter.readString(STORAGE_KEY_UPDATE_DISMISSED_VERSION);
           const isNewer = updateState.currentVersion.localeCompare(release.version, undefined, { numeric: true, sensitivity: 'base' }) < 0;
           const showUpdate = isNewer && release.version !== dismissedVersion;

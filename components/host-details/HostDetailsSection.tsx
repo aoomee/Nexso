@@ -1,7 +1,7 @@
 import { HelpCircle } from "lucide-react";
 import React from "react";
 import { cn } from "../../lib/utils";
-import { Card } from "../ui/card";
+import { WorkspaceSection } from "../workspace/WorkspaceChrome";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export function HostDetailsHelp({
@@ -50,19 +50,17 @@ export function HostDetailsSection({
   action?: React.ReactNode;
 }) {
   return (
-    <Card className={cn("p-3 space-y-3 bg-card border-border/80 shadow-sm", className)}>
-      <div className="flex min-h-5 items-center gap-1.5">
-        <span className="flex h-5 w-4 shrink-0 items-center justify-center text-muted-foreground [&>img]:block [&>img]:h-4 [&>img]:w-4 [&>img]:object-contain [&>svg]:block [&>svg]:h-4 [&>svg]:w-4">
-          {icon}
-        </span>
-        <p className="flex min-h-5 items-center text-xs font-semibold leading-5 text-foreground">
-          {title}
-        </p>
+    <WorkspaceSection
+      title={title}
+      icon={icon}
+      className={className}
+      accessory={<>
         {hint && <HostDetailsHelp>{hint}</HostDetailsHelp>}
         {action && <div className="ml-auto flex items-center">{action}</div>}
-      </div>
+      </>}
+    >
       {children}
-    </Card>
+    </WorkspaceSection>
   );
 }
 

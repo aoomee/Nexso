@@ -272,7 +272,7 @@ export const zhTWCoreMessages: Messages = {
   'settings.system.crashLogs.expand': '檢視詳情',
 
   // Settings > System > Software Update
-  'settings.update.title': '軟體更新',
+  'settings.update.title': 'Nexso 更新',
   'settings.update.currentVersion': '目前版本',
   'settings.update.checkForUpdates': '檢查更新',
   'settings.update.checking': '檢查中...',
@@ -286,13 +286,13 @@ export const zhTWCoreMessages: Messages = {
   'settings.update.downloadError': '下載失敗。',
   'settings.update.manualDownload': '前往 GitHub 下載',
   'settings.update.manualDownloadHint': '目前平台不支援自動更新，請前往 GitHub 下載最新版本。',
-  'settings.update.hint': 'Netcatty 從 GitHub Releases 檢查更新。',
+  'settings.update.hint': '從 Nexso 的 GitHub Releases 取得更新。',
   'settings.update.lastCheckedJustNow': '剛剛',
   'settings.update.lastCheckedMinutesAgo': '{n} 分鐘前',
   'settings.update.lastCheckedHoursAgo': '{n} 小時前',
   'settings.update.lastCheckedPrefix': '上次檢查：',
-  'settings.update.autoUpdateEnabled': '自動更新',
-  'settings.update.autoUpdateEnabledDesc': '有新版本時自動檢查並下載更新。',
+  'settings.update.autoUpdateEnabled': '自動檢查更新',
+  'settings.update.autoUpdateEnabledDesc': '發現新版本時通知我。',
 
   // Settings > Session Restore
   'settings.sessionRestore.title': '工作階段恢復',

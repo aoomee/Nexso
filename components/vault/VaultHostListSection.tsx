@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import { WorkspacePageHeading } from "../workspace/WorkspaceChrome";
 import { HostNotesIndicator } from "../host/HostNotesIndicator";
 import {
   VirtualizedGroupedHostCollection,
@@ -378,7 +379,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
   return <div
           ref={hostListScrollRef}
           className={cn(
-            "relative flex-1 overflow-auto px-4 pb-4 [&>:not([data-vault-marquee])~:not([data-vault-marquee])]:mt-3",
+            "relative flex-1 overflow-auto px-6 pb-6 [&>:not([data-vault-marquee])~:not([data-vault-marquee])]:mt-3",
             viewMode === "tree" ? "pt-1.5" : "pt-0",
             !isHostsSectionActive && "hidden",
             marqueeRect && "select-none",
@@ -504,8 +505,11 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
             />
           )}
                 {viewMode !== "tree" && (
-                  <section className="space-y-2 pt-2">
-                    <div className="flex items-center gap-2 text-sm font-semibold">
+                  <WorkspacePageHeading
+                    title={selectedGroupPath?.split("/").filter(Boolean).at(-1) || t("vault.hosts.allHosts")}
+                    count={visibleDisplayedHosts.length}
+                    breadcrumb={
+                    <div className="flex items-center gap-2 text-xs font-normal">
                       <button
                         className={cn(
                           "text-primary hover:underline transition-colors duration-150 rounded px-1 -mx-1",
@@ -568,7 +572,8 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                             );
                           })}
                     </div>
-                  </section>
+                    }
+                  />
                 )}
                   {/* Pinned hosts section - only at root level */}
                   {viewMode !== "tree" && !selectedGroupPath && pinnedHosts.length > 0 && (
@@ -602,7 +607,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                     "vault-drop-indicator-row group cursor-pointer relative",
                                     viewMode === "grid"
                                       ? cn(
-                                        "soft-card elevate rounded-xl h-[68px] px-3 py-2 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
+                                        "workspace-host-card rounded-[18px] h-[52px] px-3 py-1.5 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
                                         draggingHostIds?.has(host.id) && "opacity-45",
                                         hostCardFocusClassName(viewMode, isHostFocusSelected(host.id)),
                                       )
@@ -636,7 +641,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                   {viewMode === "grid" && (
                                     <Star size={10} className="absolute top-1.5 right-1.5 text-amber-400 fill-amber-400" />
                                   )}
-                                  <div className="flex items-center gap-3 h-full">
+                                  <div className="flex items-center gap-2 h-full">
                                     {isMultiSelectMode && (
                                       <div className="shrink-0">
                                         {selectedHostIds.has(host.id) ? (
@@ -646,10 +651,10 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                         )}
                                       </div>
                                     )}
-                                    <DistroAvatar host={safeHost} fallback={distroBadge.text} size="lg" />
-                                    <div className="min-w-0 flex flex-col justify-center gap-0.5 flex-1">
+                                    <DistroAvatar host={safeHost} appearance="quiet" fallback={distroBadge.text} size="lg" />
+                                    <div className="min-w-0 flex flex-col justify-center gap-0 flex-1">
                                       <div className="flex items-center gap-1.5">
-                                        <span className="text-sm font-semibold truncate leading-5">
+                                        <span className="text-sm font-medium truncate leading-5">
                                           {safeHost.label}
                                         </span>
                                         {viewMode !== "grid" && renderHostEditButton(host, true)}
@@ -728,7 +733,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                     "vault-drop-indicator-row group cursor-pointer relative",
                                     viewMode === "grid"
                                       ? cn(
-                                        "soft-card elevate rounded-xl h-[68px] px-3 py-2 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
+                                        "workspace-host-card rounded-[18px] h-[52px] px-3 py-1.5 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
                                         draggingHostIds?.has(host.id) && "opacity-45",
                                         hostCardFocusClassName(viewMode, isHostFocusSelected(host.id)),
                                       )
@@ -757,7 +762,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                     activateHost(safeHost);
                                   }}
                                 >
-                                  <div className="flex items-center gap-3 h-full">
+                                  <div className="flex items-center gap-2 h-full">
                                     {isMultiSelectMode && (
                                       <div className="shrink-0">
                                         {selectedHostIds.has(host.id) ? (
@@ -767,10 +772,10 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                         )}
                                       </div>
                                     )}
-                                    <DistroAvatar host={safeHost} fallback={distroBadge.text} size="lg" />
-                                    <div className="min-w-0 flex flex-col justify-center gap-0.5 flex-1">
+                                    <DistroAvatar host={safeHost} appearance="quiet" fallback={distroBadge.text} size="lg" />
+                                    <div className="min-w-0 flex flex-col justify-center gap-0 flex-1">
                                       <div className="flex items-center gap-1.5">
-                                        <span className="text-sm font-semibold truncate leading-5">
+                                        <span className="text-sm font-medium truncate leading-5">
                                           {safeHost.label}
                                         </span>
                                         {viewMode !== "grid" && renderHostEditButton(host, true)}
@@ -866,7 +871,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                 "vault-drop-indicator-row group cursor-pointer transition-colors duration-150",
                                 viewMode === "grid"
                                   ? cn(
-                                    "soft-card elevate rounded-xl h-[68px] px-3 py-2 will-change-transform transition-[box-shadow,border-color,background-color] duration-150",
+                                    "workspace-host-card workspace-group-card rounded-[18px] h-[52px] px-3 py-1.5 will-change-transform transition-[box-shadow,border-color,background-color] duration-150",
                                     hostCardFocusClassName(
                                       "grid",
                                       isGroupFocusSelected(node.path) || multiSelectedGroupPaths.has(node.path),
@@ -943,17 +948,17 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                 }
                               }}
                             >
-                              <div className="flex items-center gap-3 h-full">
+                              <div className="flex items-center gap-2 h-full">
                                 <VaultEntityIcon
-                                  className={vaultPrimaryIconClass}
+                                  className={cn(vaultPrimaryIconClass, "workspace-group-icon")}
                                   icon={isMultiSelectMode
                                     ? multiSelectedGroupPaths.has(node.path)
                                       ? <CheckSquare size={20} />
                                       : <Square size={20} />
                                     : <FolderTree size={20} />}
                                 />
-                                <div className="flex-1 min-w-0">
-                                  <div className="text-sm font-semibold flex items-center gap-1.5 min-w-0">
+                                <div className="workspace-group-copy flex-1 min-w-0">
+                                  <div className="text-sm font-medium flex items-center gap-1.5 min-w-0">
                                     <span className="truncate">{node.name}</span>
                                     <HostNotesIndicator notes={groupConfigs.find((config) => config.path === node.path)?.notes} label="Group notes" />
                                     {!isMultiSelectMode && viewMode !== "grid" && renderGroupEditButton(node.path, true)}
@@ -1100,7 +1105,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                           "vault-drop-indicator-row group cursor-pointer relative",
                                           viewMode === "grid"
                                             ? cn(
-                                              "soft-card elevate rounded-xl h-[68px] px-3 py-2 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
+                                              "workspace-host-card rounded-[18px] h-[52px] px-3 py-1.5 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
                                               draggingHostIds?.has(host.id) && "opacity-45",
                                               hostCardFocusClassName(viewMode, isHostFocusSelected(host.id)),
                                             )
@@ -1132,7 +1137,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                         {host.pinned && viewMode === "grid" && (
                                           <Star size={10} className="absolute top-1.5 right-1.5 text-amber-400 fill-amber-400" />
                                         )}
-                                        <div className="flex items-center gap-3 h-full">
+                                        <div className="flex items-center gap-2 h-full">
                                           {isMultiSelectMode && (
                                             <div className="shrink-0" aria-hidden="true">
                                               {selectedHostIds.has(host.id) ? (
@@ -1144,12 +1149,12 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                           )}
                                           <DistroAvatar
                                             host={safeHost}
-                                            fallback={distroBadge.text}
+                                            appearance="quiet" fallback={distroBadge.text}
                                             size="lg"
                                           />
-                                          <div className="min-w-0 flex flex-col justify-center gap-0.5 flex-1">
+                                          <div className="min-w-0 flex flex-col justify-center gap-0 flex-1">
                                             <div className="flex items-center gap-1.5">
-                                              <span className="text-sm font-semibold truncate leading-5">
+                                              <span className="text-sm font-medium truncate leading-5">
                                                 {safeHost.label}
                                               </span>
                                               {viewMode !== "grid" && renderHostEditButton(host, true)}
@@ -1251,7 +1256,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                     "vault-drop-indicator-row group cursor-pointer relative",
                                     viewMode === "grid"
                                       ? cn(
-                                        "soft-card elevate rounded-xl h-[68px] px-3 py-2 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
+                                        "workspace-host-card rounded-[18px] h-[52px] px-3 py-1.5 will-change-transform transition-[opacity,box-shadow,border-color,background-color] duration-150",
                                         draggingHostIds?.has(host.id) && "opacity-45",
                                         hostCardFocusClassName(viewMode, isHostFocusSelected(host.id)),
                                       )
@@ -1283,7 +1288,7 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                   {host.pinned && viewMode === "grid" && (
                                     <Star size={10} className="absolute top-1.5 right-1.5 text-amber-400 fill-amber-400" />
                                   )}
-                                  <div className="flex items-center gap-3 h-full">
+                                  <div className="flex items-center gap-2 h-full">
                                     {isMultiSelectMode && (
                                       <div className="shrink-0" aria-hidden="true">
                                         {selectedHostIds.has(host.id) ? (
@@ -1295,12 +1300,12 @@ export function VaultHostListSection({ ctx }: { ctx: VaultHostListSectionContext
                                     )}
                                     <DistroAvatar
                                       host={safeHost}
-                                      fallback={distroBadge.text}
+                                      appearance="quiet" fallback={distroBadge.text}
                                       size="lg"
                                     />
-                                    <div className="min-w-0 flex flex-col justify-center gap-0.5 flex-1">
+                                    <div className="min-w-0 flex flex-col justify-center gap-0 flex-1">
                                       <div className="flex items-center gap-1.5">
-                                        <span className="text-sm font-semibold truncate leading-5">
+                                        <span className="text-sm font-medium truncate leading-5">
                                           {safeHost.label}
                                         </span>
                                         {viewMode !== "grid" && renderHostEditButton(host, true)}

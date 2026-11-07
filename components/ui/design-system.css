@@ -1,0 +1,65 @@
+/* Shared application geometry: controls, surfaces and floating layers. */
+:root {
+  --ui-radius-small: 10px;
+  --ui-radius-control: 16px;
+  --ui-radius-menu: 20px;
+  --ui-radius-surface: 24px;
+  --ui-radius-dialog: 28px;
+  --ui-shadow-floating: 0 4px 12px rgb(20 27 44 / .06), 0 20px 48px rgb(20 27 44 / .12);
+  --ui-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ui-duration-fast: 140ms;
+  --ui-duration-normal: 220ms;
+  --ui-duration-panel: 300ms;
+}
+.dark { --ui-shadow-floating: 0 8px 28px rgb(0 0 0 / .35); }
+@layer components {
+  .ui-control, .ui-button { border-radius: var(--ui-radius-control); }
+  .ui-control { border-color: hsl(var(--input)); color: hsl(var(--foreground)); box-shadow: none; }
+  .ui-control::placeholder { color: hsl(var(--muted-foreground)); opacity: 1; }
+  .ui-surface { border-radius: var(--ui-radius-surface); border: 1px solid hsl(var(--border)); background: hsl(var(--card)); color: hsl(var(--card-foreground)); box-shadow: none; }
+  .ui-menu { border-radius: var(--ui-radius-menu); border-color: hsl(var(--border)); box-shadow: var(--ui-shadow-floating); }
+  .ui-dialog { border-radius: var(--ui-radius-dialog); border-color: hsl(var(--border)); box-shadow: var(--ui-shadow-floating); }
+}
+/* Keep a visible keyboard focus even where a utility removes the native outline. */
+.ui-control:focus-visible, .ui-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Animate composited properties only; never interpolate pane/terminal dimensions. */
+.ui-button, .ui-control {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: var(--ui-duration-normal);
+  transition-timing-function: var(--ui-ease-out);
+}
+.ui-button { transition-property: background-color, border-color, color, box-shadow, opacity, scale; }
+.ui-button:not(:disabled):not([aria-disabled="true"]):active { scale: .98; transition-duration: var(--ui-duration-fast); }
+.ui-menu {
+  transform-origin: var(--radix-popover-content-transform-origin, var(--radix-context-menu-content-transform-origin, var(--radix-select-content-transform-origin, top center)));
+  animation: ui-float-enter var(--ui-duration-normal) var(--ui-ease-out);
+}
+.ui-menu[data-state="closed"] { animation: ui-float-exit var(--ui-duration-fast) ease-in; }
+.ui-dialog { animation: ui-dialog-enter var(--ui-duration-panel) var(--ui-ease-out); }
+.ui-dialog[data-state="closed"] { animation: ui-dialog-exit 160ms ease-in; }
+.ui-overlay { animation: ui-opacity-enter var(--ui-duration-normal) ease-out; }
+.ui-overlay[data-state="closed"] { animation: ui-opacity-exit 160ms ease-in; }
+.ui-panel-motion { animation: ui-panel-enter var(--ui-duration-panel) var(--ui-ease-out); }
+.ui-panel-motion[data-native-view-occluder] { border-start-start-radius: var(--ui-radius-dialog); border-end-start-radius: var(--ui-radius-dialog); }
+@keyframes ui-float-enter { from { opacity: 0; scale: .98; } to { opacity: 1; scale: 1; } }
+@keyframes ui-float-exit { from { opacity: 1; scale: 1; } to { opacity: 0; scale: .985; } }
+/* Individual scale/translate preserve the dialog's existing centering transform. */
+@keyframes ui-dialog-enter { from { opacity: 0; scale: .975; } to { opacity: 1; scale: 1; } }
+@keyframes ui-dialog-exit { from { opacity: 1; scale: 1; } to { opacity: 0; scale: .985; } }
+@keyframes ui-panel-enter { from { opacity: 0; translate: 10px 0; } to { opacity: 1; translate: 0 0; } }
+@keyframes ui-opacity-enter { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ui-opacity-exit { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .ui-button, .ui-control, .ui-menu, .ui-dialog, .ui-overlay, .ui-panel-motion {
+    animation: none !important;
+    transition: none !important;
+  }
+  .ui-button:active { scale: none !important; }
+}
+
+/* Select positioning measures the open content; preserve its no-animation contract. */
+.ui-menu.ui-menu-static { animation: none; }

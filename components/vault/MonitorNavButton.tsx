@@ -21,11 +21,12 @@ export function MonitorNavButton({
           variant={active ? "secondary" : "ghost"}
           onClick={onClick}
           aria-label={t("monitor.title")}
+          aria-current={active ? "page" : undefined}
           className={cn(
             "w-full h-10",
             collapsed ? "justify-center p-0" : "justify-start gap-3",
             active &&
-              "bg-foreground/10 text-foreground hover:bg-foreground/15 border-border/40",
+              "bg-secondary text-foreground hover:bg-secondary border-transparent",
           )}
         >
           <Gauge size={16} className="shrink-0" />

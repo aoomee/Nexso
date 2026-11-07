@@ -56,6 +56,8 @@
 !build/**
 !components/
 !components/**
+!design/
+!design/**
 !docs/
 !docs/**
 !domain/
@@ -173,3 +175,11 @@ build_with_vs2022.bat
 
 # Local plugin example staging and bundles
 /examples/plugins/*/.package/
+
+# Nexso project metadata
+!/nexso.config.json
+!/README.upstream.md
+!/UPSTREAM.md
+
+# Generated, reviewed application artwork needed by clean source builds
+!/build/icon.icns

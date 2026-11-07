@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' data: blob: ws: wss: https:; img-src 'self' data: https:;" />
-  <title>netcatty SSH</title>
+  <title>Nexso</title>
   <style>
     /* Load extended Unicode ranges for terminal box drawing characters */
     @font-face {
@@ -16,26 +16,26 @@
     }
 
     :root {
-      --background: 216 33% 96%;
-      --foreground: 222 47% 12%;
+      --background: 220 18% 97%;
+      --foreground: 222 28% 13%;
       --card: 0 0% 100%;
-      --card-foreground: 222 47% 12%;
+      --card-foreground: 222 28% 13%;
       --popover: 0 0% 100%;
-      --popover-foreground: 222 47% 12%;
-      --primary: 208 100% 50%;
+      --popover-foreground: 222 28% 13%;
+      --primary: 218 38% 35%;
       --primary-foreground: 0 0% 100%;
-      --secondary: 220 16% 90%;
-      --secondary-foreground: 222 47% 12%;
-      --muted: 220 16% 90%;
-      --muted-foreground: 220 10% 45%;
-      --accent: var(--primary);
-      --accent-foreground: 222 47% 12%;
+      --secondary: 220 16% 91%;
+      --secondary-foreground: 222 28% 13%;
+      --muted: 220 16% 91%;
+      --muted-foreground: 218 14% 36%;
+      --accent: 218 22% 87%;
+      --accent-foreground: 222 28% 13%;
       --destructive: 0 70% 50%;
       --destructive-foreground: 0 0% 100%;
-      --border: 220 16% 82%;
-      --input: 220 16% 82%;
-      --ring: 208 100% 50%;
-      --radius: 0.65rem;
+      --border: 220 12% 77%;
+      --input: 220 10% 53%;
+      --ring: 218 38% 35%;
+      --radius: 1rem;
       /* Boot default until index.css / Appearance setting update --font-sans.
          Must stay on the CSS variable so portaled panels inherit the UI font (#2647). */
       --font-sans: "Mona Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", system-ui, sans-serif;
@@ -243,7 +243,7 @@
     <!-- Splash screen: shown while React loads, hidden after first paint -->
     <div id="splash" class="splash-screen">
       <div class="splash-content">
-        <img class="splash-logo" src="/logo.svg" alt="netcatty" draggable="false" />
+        <img class="splash-logo" src="/logo.svg" alt="Nexso" draggable="false" />
 
         <div class="splash-spinner"></div>
       </div>

@@ -1,3 +1,4 @@
+const project = require('./nexso.config.json');
 const { moshExtraResources } = require('./scripts/mosh-extra-resources.cjs');
 const { etExtraResources } = require('./scripts/et-extra-resources.cjs');
 
@@ -5,8 +6,8 @@ const { etExtraResources } = require('./scripts/et-extra-resources.cjs');
  * @type {import('electron-builder').Configuration}
  */
 module.exports = {
-    appId: 'com.netcatty.app',
-    productName: 'Netcatty',
+    appId: 'com.nexso.desktop',
+    productName: project.name,
     artifactName: '${productName}-${version}-${os}-${arch}.${ext}',
     protocols: [
         {
@@ -51,7 +52,9 @@ module.exports = {
         buildResources: 'build',
         output: 'release'
     },
+    extraMetadata: { netcattyUpdateChannel: 'manual' },
     files: [
+        'nexso.config.json',
         'dist/**/*',
         'electron/**/*',
         // The Windows Hello helper is shipped once through win.extraResources.
@@ -349,8 +352,8 @@ module.exports = {
     publish: [
         {
             provider: 'github',
-            owner: 'binaricat',
-            repo: 'Netcatty',
+            owner: project.repository.owner,
+            repo: project.repository.name,
             releaseType: 'release'
         }
     ]

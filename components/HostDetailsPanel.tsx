@@ -4,6 +4,7 @@ import {
   EyeOff,
   FileText,
   FolderPlus,
+  MapPin,
   PlugZap,
   Plus,
   Settings2,
@@ -1035,7 +1036,8 @@ const HostDetailsPanel: React.FC<HostDetailsPanelPropsWithResize> = ({
       onClose={onCancel}
       width="w-[420px]"
       layout={layout}
-      className={className}
+      className={`workspace-host-editor ${className || ""}`}
+      headerClassName="workspace-editor-header"
       dataSection="host-details-panel"
       {...asideResizeProps}
       title={
@@ -1078,6 +1080,17 @@ const HostDetailsPanel: React.FC<HostDetailsPanelPropsWithResize> = ({
       }
     >
       <AsidePanelContent>
+        {!pluginProtocolActive && (
+          <HostDetailsSection icon={<MapPin size={15} />} title={t("hostDetails.section.address")}>
+            <Input
+              aria-label={t("hostDetails.section.address")}
+              placeholder={t("hostDetails.hostname.placeholder")}
+              value={form.hostname}
+              onChange={(e) => update("hostname", e.target.value)}
+              className="h-11 w-full"
+            />
+          </HostDetailsSection>
+        )}
         <HostDetailsSection
           icon={<Settings2 size={14} className="text-muted-foreground" />}
           title={t("hostDetails.section.general")}
@@ -1150,6 +1163,7 @@ const HostDetailsPanel: React.FC<HostDetailsPanelPropsWithResize> = ({
         />
 
         {!pluginProtocolActive ? <HostDetailsConnectionSections
+          showAddress={false}
           t={t}
           form={form}
           setForm={setForm}
@@ -1397,7 +1411,7 @@ const HostDetailsPanel: React.FC<HostDetailsPanelPropsWithResize> = ({
           </Button>
         )}
       </AsidePanelContent>
-      <AsidePanelFooter>
+      <AsidePanelFooter className="workspace-editor-footer">
         <Button
           className="w-full h-10"
           onClick={handleSubmit}

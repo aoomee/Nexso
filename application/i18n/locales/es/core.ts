@@ -266,7 +266,7 @@ export const esCoreMessages: Messages = {
   'settings.system.crashLogs.expand': 'Mostrar detalles',
 
   // Settings > System > Software Update
-  'settings.update.title': 'Actualización de software',
+  'settings.update.title': 'Actualizaciones de Nexso',
   'settings.update.currentVersion': 'Versión actual',
   'settings.update.checkForUpdates': 'Buscar actualizaciones',
   'settings.update.checking': 'Comprobando...',
@@ -280,13 +280,13 @@ export const esCoreMessages: Messages = {
   'settings.update.downloadError': 'La descarga falló.',
   'settings.update.manualDownload': 'Descargar desde GitHub',
   'settings.update.manualDownloadHint': 'La actualización automática no está disponible en esta plataforma. Descarga la última versión desde GitHub.',
-  'settings.update.hint': 'Netcatty busca actualizaciones en GitHub Releases.',
+  'settings.update.hint': 'Las actualizaciones provienen de GitHub Releases de Nexso.',
   'settings.update.lastCheckedJustNow': 'ahora mismo',
   'settings.update.lastCheckedMinutesAgo': 'hace {n} min',
   'settings.update.lastCheckedHoursAgo': 'hace {n} h',
   'settings.update.lastCheckedPrefix': 'Última comprobación: ',
-  'settings.update.autoUpdateEnabled': 'Actualizaciones automáticas',
-  'settings.update.autoUpdateEnabledDesc': 'Comprueba y descarga actualizaciones automáticamente cuando estén disponibles.',
+  'settings.update.autoUpdateEnabled': 'Buscar automáticamente',
+  'settings.update.autoUpdateEnabledDesc': 'Avisarme cuando haya una nueva versión.',
 
   // Settings > Session Restore
   'settings.sessionRestore.title': 'Restauración de sesión',

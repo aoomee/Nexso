@@ -239,7 +239,7 @@ export const ruCoreMessages: Messages = {
   'settings.system.crashLogs.expand': 'Показать детали',
 
   // Settings > System > Software Update
-  'settings.update.title': 'Обновление программы',
+  'settings.update.title': 'Обновления Nexso',
   'settings.update.currentVersion': 'Текущая версия',
   'settings.update.checkForUpdates': 'Проверить обновления',
   'settings.update.checking': 'Проверка...',
@@ -253,13 +253,13 @@ export const ruCoreMessages: Messages = {
   'settings.update.downloadError': 'Не удалось загрузить обновление.',
   'settings.update.manualDownload': 'Скачать с GitHub',
   'settings.update.manualDownloadHint': 'Автообновление недоступно на этой платформе. Скачайте последнюю версию с GitHub.',
-  'settings.update.hint': 'Netcatty проверяет обновления через GitHub Releases.',
+  'settings.update.hint': 'Обновления из GitHub Releases проекта Nexso.',
   'settings.update.lastCheckedJustNow': 'только что',
   'settings.update.lastCheckedMinutesAgo': '{n} мин назад',
   'settings.update.lastCheckedHoursAgo': '{n} ч назад',
   'settings.update.lastCheckedPrefix': 'Последняя проверка: ',
-  'settings.update.autoUpdateEnabled': 'Автоматические обновления',
-  'settings.update.autoUpdateEnabledDesc': 'Автоматически проверять и загружать обновления, когда они доступны.',
+  'settings.update.autoUpdateEnabled': 'Проверять автоматически',
+  'settings.update.autoUpdateEnabledDesc': 'Сообщать о новых версиях.',
 
   // Settings > Session Logs
   'settings.sessionLogs.title': 'Журналы сессий',

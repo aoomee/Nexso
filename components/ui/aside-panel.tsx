@@ -114,7 +114,7 @@ export const AsidePanelHeader: React.FC<AsidePanelHeaderProps> = ({
     className,
 }) => {
     return (
-        <div className={cn("px-4 py-3 flex items-center justify-between border-b border-border/60 app-no-drag shrink-0", className)}>
+        <div className={cn("px-4 py-3 flex items-center justify-between border-b border-border app-no-drag shrink-0", className)}>
             <div className="flex items-center gap-2 min-w-0">
                 {showBackButton && onBack && (
                     <button
@@ -152,12 +152,12 @@ export const AsidePanelContent: React.FC<{ children: ReactNode; className?: stri
 }) => {
     if (scrollMode === "native") return (
         <div data-aside-scroll-viewport className={cn("flex-1 min-h-0 min-w-0 overflow-y-auto overscroll-y-contain host-tree-notes-scroll", className)}>
-            <div className="p-4 space-y-4 min-w-0 overflow-hidden">{children}</div>
+            <div className="p-4 space-y-3 min-w-0 overflow-hidden">{children}</div>
         </div>
     );
     return (
         <ScrollArea className={cn("flex-1 min-w-0 [&>[data-radix-scroll-area-viewport]>div]:!block [&>[data-radix-scroll-area-viewport]>div]:!min-w-0", className)}>
-            <div className="p-4 space-y-4 min-w-0 overflow-hidden">
+            <div className="p-4 space-y-3 min-w-0 overflow-hidden">
                 {children}
             </div>
         </ScrollArea>
@@ -170,7 +170,7 @@ export const AsidePanelFooter: React.FC<{ children: ReactNode; className?: strin
     className,
 }) => {
     return (
-        <div className={cn("px-4 py-3 border-t border-border/60 shrink-0", className)}>
+        <div className={cn("px-4 py-3 border-t border-border shrink-0", className)}>
             {children}
         </div>
     );
@@ -324,8 +324,8 @@ export const AsidePanelStack: React.FC<AsidePanelStackProps> = ({
         <AsidePanelContext.Provider value={{ push, pop, replace, clear, canGoBack, currentItem }}>
             <div className={cn(
                 layout === 'inline'
-                    ? "relative split-panel-enter shrink-0 h-full min-h-0 max-w-full border-l border-border/60 bg-background flex flex-col app-no-drag overflow-hidden shadow-[-16px_0_32px_hsl(var(--foreground)/0.08)]"
-                    : "absolute right-0 top-0 bottom-0 max-w-full border-l border-border/60 bg-background z-30 flex flex-col app-no-drag overflow-hidden",
+                    ? "ui-panel-motion relative shrink-0 h-full min-h-0 max-w-full border-l border-border bg-background flex flex-col app-no-drag overflow-hidden shadow-[-16px_0_32px_hsl(var(--foreground)/0.08)]"
+                    : "ui-panel-motion absolute right-0 top-0 bottom-0 max-w-full border-l border-border bg-background z-30 flex flex-col app-no-drag overflow-hidden",
                 layout === 'overlay' && width,
                 className
             )}
@@ -423,8 +423,8 @@ export const AsidePanel: React.FC<AsidePanelProps> = ({
     return (
         <div className={cn(
             layout === 'inline'
-                ? "relative split-panel-enter shrink-0 h-full min-h-0 max-w-full border-l border-border/60 bg-background flex flex-col app-no-drag overflow-hidden shadow-[-16px_0_32px_hsl(var(--foreground)/0.08)]"
-                : "absolute right-0 top-0 bottom-0 max-w-full border-l border-border/60 bg-background z-30 flex flex-col app-no-drag overflow-hidden",
+                ? "ui-panel-motion relative shrink-0 h-full min-h-0 max-w-full border-l border-border bg-background flex flex-col app-no-drag overflow-hidden shadow-[-16px_0_32px_hsl(var(--foreground)/0.08)]"
+                : "ui-panel-motion absolute right-0 top-0 bottom-0 max-w-full border-l border-border bg-background z-30 flex flex-col app-no-drag overflow-hidden",
             layout === 'overlay' && !usesPixelWidth && width,
             isResizing && 'transition-none',
             className,

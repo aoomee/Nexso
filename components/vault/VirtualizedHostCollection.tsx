@@ -5,7 +5,7 @@ import {
   VAULT_HOST_GRID_GAP,
 } from "./vaultHostGridLayout";
 
-const GRID_CARD_HEIGHT = 68;
+const GRID_CARD_HEIGHT = 52;
 const LIST_ROW_HEIGHT = 56;
 const INITIAL_VIEWPORT_HEIGHT = 800;
 const OVERSCAN_ROWS = 3;

@@ -94,9 +94,9 @@ export const STORAGE_KEY_VAULT_KNOWN_HOSTS_VIEW_MODE = 'netcatty_vault_known_hos
 export const STORAGE_KEY_AUTO_IMPORT_SYSTEM_KNOWN_HOSTS = 'netcatty_auto_import_system_known_hosts_v1';
 
 // Update check
-export const STORAGE_KEY_UPDATE_LAST_CHECK = 'netcatty_update_last_check_v1';
-export const STORAGE_KEY_UPDATE_DISMISSED_VERSION = 'netcatty_update_dismissed_version_v1';
-export const STORAGE_KEY_UPDATE_LATEST_RELEASE = 'netcatty_update_latest_release_v1';
+export const STORAGE_KEY_UPDATE_LAST_CHECK = 'nexso_aoomee_nexso_update_last_check_v2';
+export const STORAGE_KEY_UPDATE_DISMISSED_VERSION = 'nexso_aoomee_nexso_update_dismissed_version_v2';
+export const STORAGE_KEY_UPDATE_LATEST_RELEASE = 'nexso_aoomee_nexso_update_latest_release_v2';
 export const STORAGE_KEY_AUTO_UPDATE_ENABLED = 'netcatty_auto_update_enabled_v1';
 export const STORAGE_KEY_LOCAL_VAULT_BACKUP_MAX_COUNT = 'netcatty_local_vault_backup_max_count_v1';
 export const STORAGE_KEY_LOCAL_VAULT_BACKUP_LAST_APP_VERSION = 'netcatty_local_vault_backup_last_app_version_v1';

@@ -266,7 +266,7 @@ export const enCoreMessages: Messages = {
   'settings.system.crashLogs.expand': 'Show details',
 
   // Settings > System > Software Update
-  'settings.update.title': 'Software Update',
+  'settings.update.title': 'Nexso Updates',
   'settings.update.currentVersion': 'Current version',
   'settings.update.checkForUpdates': 'Check for Updates',
   'settings.update.checking': 'Checking...',
@@ -280,13 +280,13 @@ export const enCoreMessages: Messages = {
   'settings.update.downloadError': 'Download failed.',
   'settings.update.manualDownload': 'Download from GitHub',
   'settings.update.manualDownloadHint': 'Auto-update is not available on this platform. Download the latest version from GitHub.',
-  'settings.update.hint': 'Netcatty checks for updates from GitHub Releases.',
+  'settings.update.hint': 'Updates come from Nexso GitHub Releases.',
   'settings.update.lastCheckedJustNow': 'just now',
   'settings.update.lastCheckedMinutesAgo': '{n} min ago',
   'settings.update.lastCheckedHoursAgo': '{n} hr ago',
   'settings.update.lastCheckedPrefix': 'Last checked: ',
-  'settings.update.autoUpdateEnabled': 'Automatic Updates',
-  'settings.update.autoUpdateEnabledDesc': 'Automatically check and download updates when available.',
+  'settings.update.autoUpdateEnabled': 'Check automatically',
+  'settings.update.autoUpdateEnabledDesc': 'Notify me when a new version is available.',
 
   // Settings > Session Restore
   'settings.sessionRestore.title': 'Session Restore',

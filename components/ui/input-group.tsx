@@ -9,7 +9,7 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(
     <div
       ref={ref}
       className={cn(
-        'flex flex-col rounded-xl border border-border/65 bg-background transition-[border-color,background-color]',
+        'ui-control flex flex-col rounded-xl border border-input bg-background transition-[border-color,background-color]',
         'focus-within:border-primary/45 focus-within:ring-1 focus-within:ring-primary/20',
         'overflow-hidden',
         className,
@@ -28,7 +28,7 @@ export const InputGroupTextarea = forwardRef<HTMLTextAreaElement, InputGroupText
       ref={ref}
       className={cn(
         'w-full resize-none bg-transparent text-[13px] text-foreground/92 selection:bg-primary/25',
-        'placeholder:text-muted-foreground/62 placeholder:font-medium placeholder:text-[13px]',
+        'placeholder:text-muted-foreground placeholder:font-medium placeholder:text-[13px]',
         'focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed',
         'px-4 pt-3.5 pb-2 leading-[20px]',
         'field-sizing-content min-h-[82px] max-h-52',
@@ -72,14 +72,14 @@ export const InputGroupButton = forwardRef<HTMLButtonElement, InputGroupButtonPr
       type="button"
       disabled={disabled}
       className={cn(
-        'inline-flex items-center justify-center rounded-md transition-colors cursor-pointer',
+        'ui-button inline-flex items-center justify-center rounded-md transition-colors cursor-pointer',
         'disabled:opacity-30 disabled:cursor-default',
         size === 'icon-sm' && 'h-7 w-7',
         size === 'sm' && 'h-7 px-2 text-[12px] gap-1',
         size === 'default' && 'h-8 px-3 text-[13px] gap-1.5',
-        variant === 'ghost' && 'text-muted-foreground/78 hover:text-foreground hover:bg-muted/45',
+        variant === 'ghost' && 'text-muted-foreground hover:text-foreground hover:bg-muted/45',
         variant === 'default' && 'bg-primary/80 text-primary-foreground hover:bg-primary',
-        variant === 'outline' && 'border border-border/40 text-muted-foreground/85 hover:text-foreground hover:bg-muted/35',
+        variant === 'outline' && 'border border-border/40 text-muted-foreground hover:text-foreground hover:bg-muted/35',
         variant === 'destructive' && 'text-destructive/70 hover:text-destructive hover:bg-destructive/10',
         className,
       )}

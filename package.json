@@ -1,9 +1,9 @@
 {
-  "name": "netcatty",
-  "description": "Netcatty is a modern SSH manager and terminal app with host grouping, SFTP, keychain, port forwarding, and a rich UI.",
-  "homepage": "https://github.com/binaricat/Netcatty",
+  "name": "nexso",
+  "description": "Nexso: a compact SSH workspace based on Netcatty.",
+  "homepage": "https://github.com/aoomee/Nexso",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.2",
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -81,7 +81,9 @@
     "test:xterm-keyword-highlight-performance": "electron scripts/xterm-keyword-highlight-performance.live.test.cjs",
     "test:xterm-keyword-highlight-throughput": "electron scripts/xterm-keyword-highlight-throughput.live.test.cjs",
     "build:plugin-view-examples": "node scripts/build-plugin-view-examples.mjs",
-    "test:plugin-host-drawn:electron": "electron electron/plugins/hostReactUi.live.test.cjs"
+    "test:plugin-host-drawn:electron": "electron electron/plugins/hostReactUi.live.test.cjs",
+    "preview:ui": "node scripts/build-ui-preview.mjs",
+    "icons:nexso": "node scripts/generate-nexso-icons.cjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.956.0",
@@ -134,6 +136,7 @@
     "@radix-ui/react-select": "2.2.6",
     "@radix-ui/react-tabs": "1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
+    "@resvg/resvg-js": "2.6.2",
     "@streamdown/cjk": "^1.0.2",
     "@streamdown/code": "^1.1.0",
     "@tailwindcss/vite": "^4.1.17",
@@ -204,5 +207,9 @@
     "axios": "1.13.5",
     "node-abi": "4.31.0",
     "@electron/asar": "4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aoomee/Nexso.git"
   }
 }

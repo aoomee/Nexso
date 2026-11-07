@@ -1,0 +1,24 @@
+name: Nexso Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx --no-install patch-package
+      - run: npm run build:plugin-packages
+      - run: npm run lint
+      - name: UI and project update regressions
+        run: node --test --test-concurrency=2 --import tsx components/DistroAvatar.test.tsx components/AppWordmark.test.tsx components/HostDetailsPanel*.test.ts* components/TopTabs*.test.ts* components/vault/*.test.ts* infrastructure/config/uiThemes.test.ts domain/hostClickBehavior.test.ts infrastructure/services/updateService.test.ts electron/bridges/autoUpdateBridge.test.cjs scripts/mac-dock-icon.test.cjs
+      - run: npm run build

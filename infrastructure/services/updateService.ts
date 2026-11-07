@@ -6,14 +6,19 @@
  * 2. electron-updater bridge (used by SettingsSystemTab for download/install)
  */
 
+import project from "../../nexso.config.json";
 import { netcattyBridge } from "./netcattyBridge";
 
 // ================================
 // Part 1: GitHub API Version Check
 // ================================
 
-const GITHUB_API_URL = 'https://api.github.com/repos/binaricat/Netcatty/releases/latest';
-const RELEASES_PAGE_URL = 'https://github.com/binaricat/Netcatty/releases';
+export const RELEASES_PAGE_URL = `https://github.com/${project.repository.owner}/${project.repository.name}/releases`;
+const GITHUB_API_URL = `https://api.github.com/repos/${project.repository.owner}/${project.repository.name}/releases/latest`;
+
+export function isProjectReleaseUrl(value: unknown): value is string {
+  return typeof value === 'string' && value.startsWith(`${RELEASES_PAGE_URL}/tag/`);
+}
 
 export interface ReleaseInfo {
   version: string;       // e.g. "1.0.0" (without 'v' prefix)
@@ -79,11 +84,18 @@ export async function checkForUpdates(currentVersion: string): Promise<UpdateChe
       headers: { Accept: 'application/vnd.github.v3+json' },
     });
 
+    // A newly created repository may not have a published stable release yet.
+    if (response.status === 404) {
+      return { hasUpdate: false, currentVersion, latestRelease: null };
+    }
     if (!response.ok) {
       throw new Error(`GitHub API returned ${response.status}`);
     }
 
     const data = await response.json();
+    if (!isProjectReleaseUrl(data.html_url) || typeof data.tag_name !== 'string') {
+      throw new Error('Release does not belong to Nexso');
+    }
     const latestVersion = (data.tag_name as string).replace(/^v/i, '');
 
     const latestRelease: ReleaseInfo = {

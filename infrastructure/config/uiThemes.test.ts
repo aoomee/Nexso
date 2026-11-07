@@ -109,3 +109,23 @@ describe("system preset UI themes", () => {
     }
   });
 });
+
+// Guard the neutral workspace palette against washed-out labels and form outlines.
+it("Snow keeps text and control boundaries legible on its working surfaces", async () => {
+  const { getContrastRatio, getHslTokenRelativeLuminance } = await import("../../domain/colorContrast");
+  const { tokens } = getUiThemeById("light", "snow");
+  const contrast = (front: string, back: string) => {
+    const fg = getHslTokenRelativeLuminance(front);
+    const bg = getHslTokenRelativeLuminance(back);
+    assert.notEqual(fg, null);
+    assert.notEqual(bg, null);
+    return getContrastRatio(fg!, bg!);
+  };
+  for (const surface of [tokens.background, tokens.card, tokens.secondary]) {
+    assert.ok(contrast(tokens.foreground, surface) >= 7, "body text contrast");
+    assert.ok(contrast(tokens.mutedForeground, surface) >= 4.5, "secondary text contrast");
+  }
+  assert.ok(contrast(tokens.primaryForeground, tokens.primary) >= 4.5, "primary button label");
+  assert.ok(contrast(tokens.accentForeground, tokens.accent) >= 4.5, "selected menu item");
+  assert.ok(contrast(tokens.input, tokens.background) >= 3, "input boundary");
+});

@@ -270,7 +270,7 @@ export const zhCNCoreMessages: Messages = {
   'settings.system.crashLogs.expand': '查看详情',
 
   // Settings > System > Software Update
-  'settings.update.title': '软件更新',
+  'settings.update.title': 'Nexso 更新',
   'settings.update.currentVersion': '当前版本',
   'settings.update.checkForUpdates': '检查更新',
   'settings.update.checking': '检查中...',
@@ -284,13 +284,13 @@ export const zhCNCoreMessages: Messages = {
   'settings.update.downloadError': '下载失败。',
   'settings.update.manualDownload': '前往 GitHub 下载',
   'settings.update.manualDownloadHint': '当前平台不支持自动更新，请前往 GitHub 下载最新版本。',
-  'settings.update.hint': 'Netcatty 从 GitHub Releases 检查更新。',
+  'settings.update.hint': '从 Nexso 的 GitHub Releases 获取更新。',
   'settings.update.lastCheckedJustNow': '刚刚',
   'settings.update.lastCheckedMinutesAgo': '{n} 分钟前',
   'settings.update.lastCheckedHoursAgo': '{n} 小时前',
   'settings.update.lastCheckedPrefix': '上次检查：',
-  'settings.update.autoUpdateEnabled': '自动更新',
-  'settings.update.autoUpdateEnabledDesc': '有新版本时自动检查并下载更新。',
+  'settings.update.autoUpdateEnabled': '自动检查更新',
+  'settings.update.autoUpdateEnabledDesc': '发现新版本时通知我。',
 
   // Settings > Session Restore
   'settings.sessionRestore.title': '会话恢复',
