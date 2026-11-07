@@ -12,9 +12,10 @@ The app checks **aoomee/Nexso Releases only**. It notifies you about new version
 
 ## Build
 
-Node.js 22 or newer and platform build tools are required (Xcode Command Line Tools on macOS). Use a checkout path without spaces.
+Node.js 22 or newer, npm 11.6.2 and platform build tools are required (Xcode Command Line Tools on macOS). Use a checkout path without spaces.
 
 ```sh
+npm install --global npm@11.6.2
 npm ci
 npm run fetch:mosh:dev
 npm run fetch:et:dev

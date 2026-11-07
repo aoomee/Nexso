@@ -26,6 +26,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ inputs.tag }}
         run: node -e 'if (process.env.RELEASE_TAG !== "v" + require("./package.json").version) process.exit(1)'
+      - run: npm install --global npm@11.6.2
       - run: npm ci --ignore-scripts
       - run: node node_modules/electron/install.js
       - run: npm run postinstall
