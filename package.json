@@ -3,7 +3,7 @@
   "description": "Nexso: a compact SSH workspace based on Netcatty.",
   "homepage": "https://github.com/aoomee/Nexso",
   "private": true,
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "module",
   "workspaces": [
     "packages/*",
