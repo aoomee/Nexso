@@ -38,3 +38,10 @@ After installing the repository dependencies, regenerate with `npm run preview:u
 - Repository/update source: https://github.com/aoomee/Nexso. Update cache is isolated from upstream; foreign release URLs are rejected. Ad-hoc builds check and notify, then open the project release page for manual installation.
 - 204 focused regression tests pass, including update-source rejection, cache isolation, icon sizes and wordmark accessibility. ESLint and production build pass.
 - Native package signature, icon resource equality and DMG checksum are verified. Full type-checking remains at the upstream 778 diagnostics.
+
+## Release privacy 0.1.3
+
+- Preview host and group labels are generic examples, including in retained source history.
+- Release commits use the project's GitHub noreply identity.
+- Native macOS debug records are stripped after dependency rebuilding and before ASAR generation. Runtime exports are retained; the final application is signed afterward.
+- Packaging fails if the build user's home path remains in application resources. The gate checks binary and packed data without echoing private values into CI logs.

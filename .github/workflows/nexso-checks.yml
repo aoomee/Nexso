@@ -20,6 +20,8 @@ jobs:
       - run: npx --no-install patch-package
       - run: npm run build:plugin-packages
       - run: npm run lint
+      - name: Release privacy regression tests
+        run: node --test scripts/check-build-privacy.test.cjs scripts/afterPackMacUuid.test.cjs
       - name: UI and project update regressions
         run: node --test --test-concurrency=2 --import tsx components/DistroAvatar.test.tsx components/AppWordmark.test.tsx components/HostDetailsPanel*.test.ts* components/TopTabs*.test.ts* components/vault/*.test.ts* infrastructure/config/uiThemes.test.ts domain/hostClickBehavior.test.ts infrastructure/services/updateService.test.ts electron/bridges/autoUpdateBridge.test.cjs scripts/mac-dock-icon.test.cjs
       - run: npm run build

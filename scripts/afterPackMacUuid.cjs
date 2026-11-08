@@ -384,6 +384,9 @@ async function afterPack(context) {
       `(${patched} slice(s), appId=${appId})`,
   );
 
+  // Fail the package before signing if any build-home paths survived.
+  require('./check-build-privacy.cjs').assertNoBuildHome(appResourcesDir(context));
+
   // The official Developer ID signing step runs after afterPack and replaces
   // this temporary signature. Local unsigned builds skip that step, so the
   // patched app bundle still needs a valid ad-hoc signature or macOS kills it

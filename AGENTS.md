@@ -1,5 +1,12 @@
 # Agents Overview
 
+## Nexso release privacy
+
+- Use the repository's configured GitHub noreply author and committer identity. Do not use a connected service's default identity when it exposes personal names or email addresses.
+- Preview data must use generic host/group labels and documentation-only IP addresses. Do not copy a user's real labels, credentials, account data, screenshots, or local paths into public files.
+- Retain the native debug-record stripping and build-home privacy gate when changing packaging hooks. Inspect the final packaged application, including native binaries, before publishing.
+- Never publish local audit logs or historical backups. History rewrites and old-release removal must stay within the user's explicitly authorized cleanup scope.
+
 This project is wired around three layers: domain (pure logic), application state (React hooks orchestrating the domain), and UI (components). Use this document as a quick guide for extending or reusing the codebase.
 
 ## Current Agents (Roles)

@@ -29,6 +29,7 @@ module.exports = {
     // Electron app (which all share Electron's prebuilt LC_UUID) — see #1040
     // and scripts/afterPackMacUuid.cjs. No-op on Windows/Linux.
     beforePack: './scripts/beforePackCursorSdk.cjs',
+    afterExtract: './scripts/strip-native-debug-paths.cjs',
     afterPack: './scripts/afterPackMacUuid.cjs',
     // Platform-split icons (#813):
     //   - public/icon.png keeps Apple's HIG grid margin so the rendered
